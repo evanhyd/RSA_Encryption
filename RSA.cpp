@@ -89,11 +89,12 @@ std::pair<std::pair<Key, Key>, std::pair<Key, Key>> RSA::GenerateKeys()
 
 
 	//ed = 1 (mod n_l), notice it always have solution by LCDT 1
-	std::pair<Key, Key> keys = RSA::EEA(n_l, e);
-	if (keys.second < 0) keys.second += n_l;
+	//ed + n_l*y = 1 linear diophantine
+	LL d = RSA::EEA(n_l, e).second;
+	if (d < 0) d += n_l;
 
 	//remember to change it later
-	return std::make_pair(std::make_pair(e, keys.second), std::make_pair(p, q));
+	return std::make_pair(std::make_pair(e, d), std::make_pair(p, q));
 }
 
 
