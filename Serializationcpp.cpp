@@ -11,7 +11,7 @@ std::vector<LL> RSA::Serialize(const std::string& str)
 	LL serial = 0; 
 	for (int i = 0; i < str.size(); i++)
 	{
-		// 6 letters for each unsigned long long 
+		// 6 letters for each long long 
 		LL bits = str[i] - 'a' + 1;
 		serial = serial << 5; 
 		serial = serial | bits; 
