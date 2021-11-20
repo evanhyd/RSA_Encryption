@@ -64,24 +64,11 @@ std::pair<LL, LL> RSA::EEA(LL x, LL y)
 
 	while (true)
 	{
-
-		std::cout << s3 << ' ' << t3 << ' ' << r3 << ' ' << q3 << '\n';
-
 		q3 = r1 / r2;
-		std::cout << q3 << '\n';
-
-
 		s3 = s1 - s2 * q3;
-		std::cout << s3 << '\n';
-
 		t3 = t1 - t2 * q3;
-		std::cout << t3 << '\n';
-		
-		
 		r3 = r1 - r2 * q3;
-		std::cout << r3 << '\n';
 
-		std::cout << s3 << ' ' << t3 << ' ' << r3 << ' ' << q3 <<'\n';
 
 		if (r3 == 0) return std::make_pair(s2, t2);
 
