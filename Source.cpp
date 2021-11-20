@@ -1,4 +1,5 @@
 ﻿#include <iostream>
+#include "RSA.h"
 #define 无 void
 #define 整数 int
 #define 小数 float
@@ -15,17 +16,8 @@
 
 整数 主程序()
 {
-	整数 a = 10;
-	整数 b = 20;
-
-	循环(整数 i = 0; i < 999; ++i)
-	{
-		a += b;
-	}
-
-	打印("%d\n", a);
-
-	返回 0;
+	auto p = RSA::EEA(42, 21);
+	cout << p.first << ' ' << p.second << '\n';
 }
 
 
