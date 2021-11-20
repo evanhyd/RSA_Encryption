@@ -22,15 +22,15 @@
 	*/
 	const std::string str = "teachers";
 	std::vector<LL> temp = RSA::Serialize(str);
-	//for (LL i : temp)
+	for (LL i : temp)
 	{
-	//	cout << i << " "; 
+		cout << i << " "; 
 	}
 
-	//cout << endl;
+	cout << endl;
 
-	//std::string dictionary = RSA::Deserialize(temp);
-	//cout << dictionary; 
+	std::string dictionary = RSA::Deserialize(temp);
+	cout << dictionary; 
 
 }
 
