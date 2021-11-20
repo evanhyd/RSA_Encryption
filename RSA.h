@@ -22,6 +22,7 @@ namespace RSA
 	std::pair<std::pair<Key, Key>, std::pair<Key, Key>> GenerateKeys();
 	std::vector<LL> Encrypt(const std::vector<LL>& plain, std::pair<Key, Key> public_key);
 	std::vector<LL> Decrypt(const std::vector<LL>& cypher, std::pair<Key, Key> private_keys);
+	std::vector<LL> Decrypt(const std::vector<LL>& cypher, std::pair<Key, Key> private_keys, std::pair<Key, Key> primes);
 
 }
 

@@ -158,7 +158,6 @@ std::vector<LL> RSA::Decrypt(const std::vector<LL>& cypher, std::pair<Key, Key> 
 
 	for (LL serial : cypher)
 	{
-		//to do list: FLT to speed up the decryption
 		LL r = 1;
 		for (LL power = 0; power < private_key.first; ++power)
 		{
@@ -174,4 +173,43 @@ std::vector<LL> RSA::Decrypt(const std::vector<LL>& cypher, std::pair<Key, Key> 
 }
 
 
+std::vector<LL> RSA::Decrypt(const std::vector<LL>& cypher, std::pair<Key, Key> private_keys, std::pair<Key, Key> primes)
+{
+	std::vector<LL> plain;
 
+	LL d = private_keys.first;
+	LL n = private_keys.second;
+	LL p = std::max(primes.first, primes.second);
+	LL q = std::min(primes.first, primes.second);
+
+	for (LL serial : cypher)
+	{
+		//apply SMT to reduce the modulo num
+		//applly FLT to reduce the exponents
+		LL s1 = 1;
+		LL power_1 = d % (p - 1);
+		for (LL power = 0; power < power_1; ++power)
+		{
+			s1 *= serial;
+			s1 %= n;
+		}
+
+		LL s2 = 1;
+		LL power_2 = d % (q - 1);
+		for (LL power = 0; power < power_2; ++power)
+		{
+			s2 *= serial;
+			s2 %= n;
+		}
+
+
+		//apply CRT since s1 != s2
+		//linear diophantine p*x + q*y = s2 - s1
+		LL s_d = s2 - s1;
+		LL deciphered = (p * RSA::EEA(p, q).first * (s_d) + s1) % n;
+		if (deciphered < 0) deciphered += n;
+		plain.push_back(deciphered);
+	}
+
+	return plain;
+}

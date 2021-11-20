@@ -44,7 +44,7 @@ int main()
 
 
 	//decrypt with private keys
-	std::vector<LL> decyphered = RSA::Decrypt(cypher, private_keys);
+	std::vector<LL> decyphered = RSA::Decrypt(cypher, private_keys, package.second);
 
 	for (LL serial : decyphered)
 	{
