@@ -16,8 +16,22 @@
 
 整数 主程序()
 {
+	/*
 	auto p = RSA::EEA(42, 21);
 	cout << p.first << ' ' << p.second << '\n';
+	*/
+	const std::string str = "teachers";
+	std::vector<LL> temp = RSA::Serialize(str);
+	//for (LL i : temp)
+	{
+	//	cout << i << " "; 
+	}
+
+	//cout << endl;
+
+	//std::string dictionary = RSA::Deserialize(temp);
+	//cout << dictionary; 
+
 }
 
 
