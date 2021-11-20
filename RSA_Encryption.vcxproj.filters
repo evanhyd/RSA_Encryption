@@ -21,9 +21,6 @@
     <ClCompile Include="RSA.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Serializationcpp.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="RSA.h">

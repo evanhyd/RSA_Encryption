@@ -1,37 +1,61 @@
 ﻿#include <iostream>
 #include "RSA.h"
-#define 无 void
-#define 整数 int
-#define 小数 float
-#define 双小数 double
-#define 循环 for
-#define 返回 return
-#define 主程序 main
-#define 使用 using
-#define 名字空间 namespace
-#define 打印 printf
 
-
-使用 名字空间 std;
-
-整数 主程序()
+int main()
 {
-	/*
-	auto p = RSA::EEA(42, 21);
-	cout << p.first << ' ' << p.second << '\n';
-	*/
-	const std::string str = "teachers";
-	std::vector<LL> temp = RSA::Serialize(str);
-	for (LL i : temp)
+	if (!RSA::LoadPrimeTable("prime_list.txt")) std::cout << "Could not find the prime list\n";
+
+
+	//generate RSA keys
+	auto package = RSA::GenerateKeys();
+	LL e = package.first.first;
+	LL d = package.first.second;
+	LL n = package.second.first * package.second.second;
+	auto public_keys = std::make_pair(e, n);
+	auto private_keys = std::make_pair(d, n);
+
+	std::cout << "Public Keys: " << e << ' ' << n << '\n';
+	std::cout << "Private Keys: " << d << ' ' << n << '\n';
+
+
+	//input text
+	std::string plain;
+	std::cin >> plain;
+
+
+	//serialize text
+	std::vector<LL> serialized_data = RSA::Serialize(plain);
+
+	for (LL serial : serialized_data)
 	{
-		cout << i << " "; 
+		std::cout << serial << ' ';
 	}
+	std::cout << '\n';
 
-	cout << endl;
+	
+	//encrypt with public keys
+	std::vector<LL> cypher = RSA::Encrypt(serialized_data, public_keys);
 
-	std::string dictionary = RSA::Deserialize(temp);
-	cout << dictionary; 
+	for (LL c : cypher)
+	{
+		std::cout << c << ' ';
+	}
+	std::cout << '\n';
+
+
+	//decrypt with private keys
+	std::vector<LL> decyphered = RSA::Decrypt(cypher, private_keys);
+
+	for (LL serial : decyphered)
+	{
+		std::cout << serial << ' ';
+	}
+	std::cout << '\n';
+
+
+	//checking the text
+	std::string deciphered_plain = RSA::Deserialize(decyphered);
+	
+	std::cout << deciphered_plain << '\n';
 
 }
-
-
